@@ -10,6 +10,7 @@ class oracleHandle:
 
     def insert(connection, data, tableName):
         # connect oracle database
+        # connect oracle database
         cursor = connection.cursor()
         fields = data.pop(0)
         fields_str = ",".join(fields)
