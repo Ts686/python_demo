@@ -5,13 +5,11 @@ import re
 
 class oracleHandle:
     def connect(username, password, url):
-        # conn = cx_Oracle.connect("u_db_wx", "u_db_wx", "172.17.209.243:1521/bidbportal")
         conn = cx_Oracle.connect(username, password, url)
         return conn
 
     def insert(connection, data, tableName):
         # connect oracle database
-        # db = cx_Oracle.connect("u_db_wx", "u_db_wx", "172.17.209.243:1521/bidbportal")
         cursor = connection.cursor()
         fields = data.pop(0)
         fields_str = ",".join(fields)
