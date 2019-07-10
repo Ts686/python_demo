@@ -15,6 +15,18 @@ os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
 
 # ctype： 0 empty,1 string, 2 number, 3 date, 4 boolean, 5 error
 class excelHandle:
+    def get_column_type(self, filename, sheetname):
+        rbook = xlrd.open_workbook(filename)
+        sheet = rbook.sheet_by_name(sheetname)
+        rows = sheet.nrows
+        cols = sheet.ncols
+        for i in range(rows):
+            row_content = []
+            for j in range(cols):
+                ctype = sheet.cell(i, j).ctype  # 表格的
+                value = sheet.cell(i, j).value
+                print(value, "=", ctype)
+
     def decode(self, filename, sheetname):
         try:
             filename = filename.decode('utf-8')
@@ -55,9 +67,10 @@ class excelHandle:
 
 if __name__ == '__main__':
     eh = excelHandle()
-    filename = r'E:686/3.xlsx'
+    file_name = r'E:686/3.xlsx'
     sheet_name = 'A库'
-    excel_data = eh.read_excel(filename, sheet_name)
-    table_name = "cont_test2"
-    connect = oracleHandle.connect("u_db_wx", "u_db_wx", "172.17.209.243:1521/bidbportal")
-    oracleHandle.insert(connect, excel_data, table_name)
+    # excel_data = eh.read_excel(file_name, sheet_name)
+    # table_name = "cont_test2"
+    # connect = oracleHandle.connect("u_db_wx", "u_db_wx", "172.17.209.243:1521/bidbportal")
+    # oracleHandle.insert(connect, excel_data, table_name)
+    eh.get_column_type(file_name, sheet_name)
